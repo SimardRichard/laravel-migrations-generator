@@ -1,9 +1,16 @@
 # Modernisation Laravel 13+ — Design v1.0
 
+> ⚠️ **SUPERSEDED** — Ce document a été remplacé par
+> [`2026-05-07-migration-module-design.md`](./2026-05-07-migration-module-design.md).
+> Le projet a pivoté d'un package Composer standalone (`groupesti/laravel-migrations-generator`,
+> namespace `GroupeSTI\MigrationsGenerator`) vers un module GSTI hybride
+> (`App\Modules\Migration` avec sous-modules Generator/Extract/Import).
+> Conservé en historique pour traçabilité des décisions.
+
 | Champ | Valeur |
 |---|---|
 | **Date** | 2026-05-07 |
-| **Statut** | Validé (brainstorming) |
+| **Statut** | ⚠️ Superseded |
 | **Auteur** | Richard Simard (Groupe STI) |
 | **Phase** | 1 / 2 (v1.0) |
 | **Cible release** | v1.0.0 sur Packagist |

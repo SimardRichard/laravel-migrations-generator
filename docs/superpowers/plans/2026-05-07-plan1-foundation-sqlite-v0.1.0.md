@@ -1,5 +1,10 @@
 # Plan 1 — Foundation + SQLite + CLI minimale (v0.1.0-alpha)
 
+> ⚠️ **SUPERSEDED** — Ce plan a été remplacé suite au pivot architectural vers
+> un module GSTI hybride (`App\Modules\Migration\Modules\Migration\Modules\{Generator,Extract,Import}`).
+> Voir le nouveau plan : [`2026-05-07-plan1-migration-skeleton-and-generator.md`](./2026-05-07-plan1-migration-skeleton-and-generator.md).
+> Conservé en historique pour traçabilité des décisions.
+
 > **Pour les agents :** SOUS-SKILL REQUISE — utilise `superpowers:subagent-driven-development` (recommandé) ou `superpowers:executing-plans` pour exécuter ce plan tâche par tâche. Les étapes utilisent la syntaxe checkbox (`- [ ]`).
 
 **Goal:** Livrer la première version utilisable de `groupesti/laravel-migrations-generator` qui génère des migrations Laravel 13+ depuis une base **SQLite** existante via `php artisan migrate:generate`.
