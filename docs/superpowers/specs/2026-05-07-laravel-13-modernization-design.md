@@ -54,11 +54,13 @@ Ces points feront l'objet d'un brainstorming distinct lorsque v1.0 sera stable e
 │  (Actions)               │     │  (Actions)                 │
 │                          │     │                            │
 │  ReadDatabaseAction      │     │  RenderMigrationAction     │
-│   ├─ ReadTablesAction    │     │   ├─ RenderTablesStub      │
-│   ├─ ReadColumnsAction   │     │   ├─ RenderForeignKeysStub │
-│   ├─ ReadIndexesAction   │     │   └─ RenderViewsStub       │
-│   ├─ ReadFKsAction       │     │                            │
-│   └─ ReadViewsAction     │     │  WriteMigrationFileAction  │
+│  (étapes internes :      │     │  (utilise les Renderers :  │
+│   getTables → getColumns │     │   ColumnRenderer,          │
+│   → getIndexes → getFKs  │     │   IndexRenderer,           │
+│   → getViews)            │     │   ForeignKeyRenderer,      │
+│                          │     │   ViewRenderer)            │
+│                          │     │                            │
+│                          │     │  WriteMigrationFileAction  │
 └──────────┬───────────────┘     └────────────▲───────────────┘
            ▼                                  │
 ┌─────────────────────────────────────────────────────────────┐
@@ -165,6 +167,8 @@ groupesti/laravel-migrations-generator/
 │   │   └── ViewRenderer.php
 │   ├── Stub/
 │   │   └── DefaultStubRenderer.php
+│   ├── Writers/
+│   │   └── FilesystemMigrationWriter.php   # implémente MigrationWriter
 │   ├── Support/
 │   │   └── GenerateOptions.php          # DTO des options CLI parsées
 │   └── Exceptions/
@@ -404,8 +408,8 @@ php artisan migrate:generate [tables?] [options]
 
 | Cas | Comportement |
 |---|---|
-| Type de colonne **inconnu mais safe** (ex: `JSONB` PG sur driver PG) | Warning console, génère commentaire, utilise `->raw($sql)` |
-| Type de colonne **inconnu et risqué** (ex: PostGIS geometry sur driver MySQL) | Lève `UnsupportedColumnTypeException` |
+| Type de colonne **inconnu mais reproductible** (le moteur cible accepte la définition SQL brute, ex: `JSONB` PG sur driver PG via `->raw('jsonb')`) | Warning console, génère commentaire `// unmapped`, utilise `->raw($sql)` qui reste exécutable par `migrate` |
+| Type de colonne **inconnu et non reproductible** (le SQL brut référence une extension absente, ex: PostGIS `geometry` sur driver MySQL ; ou type composite PG sans équivalent Schema Builder) | Lève `UnsupportedColumnTypeException` avec contexte `{table, column, type, driver}` |
 | FK référence une table **non incluse** dans `--tables` | Warning console, FK omise du fichier, table maintenue |
 | FK **cyclique** entre 2+ tables | Lève `CircularForeignKeyException`, suggère `--squash` ou `--no-foreign-keys` |
 | Stub **introuvable** | `StubNotFoundException` immédiate |
