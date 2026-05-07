@@ -1,0 +1,38 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ ModuleName }}\Providers;
+
+use App\Support\Providers\ModuleServiceProvider;
+
+/**
+ * ServiceProvider du module {{ ModuleName }}.
+ *
+ * Hérite de ModuleServiceProvider qui charge automatiquement :
+ *   - routes/api.php (avec middleware `api` appliqué)
+ *   - Database/Migrations/
+ *   - lang/{fr,en}/
+ *   - resources/views/
+ *   - config/{{ module_name_snake }}.php (si présent)
+ *
+ * La configuration métier vit dans le Model {{ ModuleName }}Config (BD)
+ * via la classe de base App\Support\Models\ModuleConfig.
+ *
+ * Documentation API : annoter chaque méthode de controller avec
+ * `#[OA\Get/Post/Put/Patch/Delete]` et créer les schemas dans
+ * app/Modules/{{ ModuleName }}/OpenApi/. Voir .claude/rules/api-documentation.md.
+ */
+final class {{ ModuleName }}ServiceProvider extends ModuleServiceProvider
+{
+    public string $moduleCode = '{{ ModuleName }}';
+
+    public string $version = '1.0.0';
+
+    public bool $isCore = false;
+
+    /** @var array<int, string> */
+    public array $dependencies = [
+        // List the modules this one depends on, e.g. 'User', 'Permission'.
+    ];
+}

@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ ModuleName }}\Models;
+
+use App\Support\Models\ReferenceModel;
+
+/**
+ * {{ Description }}
+ * Valeurs gérables via l'interface admin.
+ */
+final class {{ Resource }} extends ReferenceModel
+{
+    protected $table = '{{ table_snake_plural }}';
+
+    // Constantes de codes système
+    // public const CODE_DRAFT = 'draft';
+}

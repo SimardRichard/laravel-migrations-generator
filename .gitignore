@@ -1,3 +1,10 @@
-vendor
-report
+/vendor/
+/build/
+/.phpunit.cache/
+/.phpunit.result.cache
+.phpstan-cache/
 composer.lock
+.idea/
+.vscode/
+.DS_Store
+tests/__snapshots__/__failed__/

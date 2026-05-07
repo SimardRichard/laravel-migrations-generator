@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-   backupStaticAttributes="false"
-   bootstrap="vendor/autoload.php"
-   colors="true"
-   convertErrorsToExceptions="true"
-   convertNoticesToExceptions="true"
-   convertWarningsToExceptions="true"
-   processIsolation="false"
-   stopOnFailure="false"
-   syntaxCheck="false"
-   stderr="true"
->
-  <testsuites>
-    <testsuite name="Application Test Suite">
-      <directory>tests</directory>
-    </testsuite>
-  </testsuites>
-  <filter>
-    <whitelist addUncoveredFilesFromWhitelist="true">
-      <directory suffix=".php">src</directory>
-    </whitelist>
-  </filter>
-  <logging>
-    <log type="coverage-html" target="report/" charset="UTF-8" yui="true" />
-  </logging>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         executionOrder="random"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true">
+    <testsuites>
+        <testsuite name="Unit"><directory>tests/Unit</directory></testsuite>
+        <testsuite name="Feature"><directory>tests/Feature</directory></testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>Modules</directory>
+            <directory>Providers</directory>
+            <directory>Exceptions</directory>
+        </include>
+    </source>
+    <php>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+    </php>
 </phpunit>

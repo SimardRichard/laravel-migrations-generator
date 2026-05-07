@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ ModuleName }}\Models;
+
+use App\Support\Models\ModuleConfig;
+
+/**
+ * Configuration du module {{ ModuleName }}.
+ * Valeurs gérables via l'interface admin.
+ */
+final class {{ ModuleName }}Config extends ModuleConfig
+{
+    protected $table = '{{ module_name_snake }}_configs';
+
+    // Clés de configuration
+    // public const KEY_EXAMPLE = 'example';
+}
