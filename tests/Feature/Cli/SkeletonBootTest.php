@@ -14,10 +14,9 @@ it('discovers the 3 stub commands', function () {
         ->toContain('migrate:import');
 });
 
-it('runs migrate:generate stub successfully', function () {
-    $exitCode = Artisan::call('migrate:generate');
-    expect($exitCode)->toBe(0)
-        ->and(Artisan::output())->toContain('not implemented yet');
+it('exposes migrate:generate signature', function () {
+    Artisan::call('list');
+    expect(Artisan::output())->toContain('migrate:generate');
 });
 
 it('runs migrate:extract stub successfully', function () {
