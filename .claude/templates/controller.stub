@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Modules\{{ ModuleName }}\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Modules\{{ ModuleName }}\Http\Requests\{Store{{ Resource }}Request, Update{{ Resource }}Request};
+use App\Modules\{{ ModuleName }}\Http\Resources\{{ Resource }}Resource;
+use App\Modules\{{ ModuleName }}\Models\{{ Resource }};
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
+class {{ Resource }}Controller extends Controller
+{
+    public function index(): AnonymousResourceCollection
+    {
+        return {{ Resource }}Resource::collection(
+            {{ Resource }}::query()->paginate(20)
+        );
+    }
+
+    public function show({{ Resource }} ${{ resource }}): {{ Resource }}Resource
+    {
+        return new {{ Resource }}Resource(${{ resource }});
+    }
+
+    public function store(Store{{ Resource }}Request $request): JsonResponse
+    {
+        ${{ resource }} = {{ Resource }}::create($request->validated());
+
+        return (new {{ Resource }}Resource(${{ resource }}))
+            ->response()->setStatusCode(201);
+    }
+
+    public function update(Update{{ Resource }}Request $request, {{ Resource }} ${{ resource }}): {{ Resource }}Resource
+    {
+        ${{ resource }}->update($request->validated());
+
+        return new {{ Resource }}Resource(${{ resource }});
+    }
+
+    public function destroy({{ Resource }} ${{ resource }}): JsonResponse
+    {
+        ${{ resource }}->delete();
+
+        return response()->json(status: 204);
+    }
+}

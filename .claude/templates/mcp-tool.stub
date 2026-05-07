@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\{{ Namespace }}\Mcp\Tools;
+
+use Laravel\Mcp\Server\Tool;
+use Laravel\Mcp\Server\Tools\ToolInputSchema;
+use Laravel\Mcp\Server\Tools\ToolResult;
+
+final class {{ ToolName }}Tool extends Tool
+{
+    public function name(): string { return '{{ tool_name_snake }}'; }
+    public function description(): string { return '{{ Description }}'; }
+
+    public function inputSchema(ToolInputSchema $schema): ToolInputSchema
+    {
+        return $schema->string('param')->required();
+    }
+
+    public function handle(array $arguments): ToolResult
+    {
+        return ToolResult::json(['success' => true, 'data' => []]);
+    }
+}

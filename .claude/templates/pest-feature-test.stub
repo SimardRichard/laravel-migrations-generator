@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Modules\{{ ModuleName }}\Models\{{ Resource }};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
+
+it('lists {{ resources }}', function () {
+    {{ Resource }}::factory()->count(3)->create();
+
+    $this->getJson('/api/v1/{{ resources_kebab }}')
+        ->assertOk()
+        ->assertJsonCount(3, 'data');
+});
+
+it('creates a {{ resource }}', function () {
+    $payload = {{ Resource }}::factory()->make()->toArray();
+
+    $this->postJson('/api/v1/{{ resources_kebab }}', $payload)
+        ->assertCreated();
+});
