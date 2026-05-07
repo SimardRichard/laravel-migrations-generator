@@ -8,3 +8,6 @@ composer.lock
 .vscode/
 .DS_Store
 tests/__snapshots__/__failed__/
+
+# Claude Code harness runtime artifacts
+.claude/scheduled_tasks.lock
