@@ -1,0 +1,28 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - Actions
+        - Console
+        - DTOs
+        - Enums
+        - Events
+        - Exceptions
+        - Http
+        - Interfaces
+        - Jobs
+        - Livewire
+        - Models
+        - Policies
+        - Providers
+        - Rules
+        - Services
+        - Traits
+        - Modules
+    excludePaths:
+        - vendor
+        - tests
+    treatPhpDocTypesAsCertain: false
+    tmpDir: .phpstan-cache
